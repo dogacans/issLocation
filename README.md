@@ -1,5 +1,5 @@
 # issLocation
-This small program gives you the address of International Space Station, with help of APIs.
+This small program gives you the address which International Space Station currently orbits over, with help of  two APIs.
 It is a program I created with the sole purpose of learning HTTP requests and APIs.
 
 The program uses Open Notify API to get the current coordinates of the ISS (http://open-notify.org/Open-Notify-API/ISS-Location-Now/)
