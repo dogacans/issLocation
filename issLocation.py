@@ -2,10 +2,11 @@
 
 import requests
 import time
+import sys
 
 # Put your locationiq API key here. To get a key: https://locationiq.com/
 # Key is free for personal use, with limitations.
-IQ_KEY = "PUT_YOUR_KEY_HERE"
+IQ_KEY = "PUT_YOUR_API_KEY_HERE"
 
 # URL to get ISS coordinates. No API key needed.
 getCoordUrl = "http://api.open-notify.org/iss-now.json"
@@ -31,8 +32,14 @@ while True:
     }
 
     try:
-        address = requests.get(getAddressUrl, params=data).json()['display_name']
-    
+        address = requests.get(getAddressUrl, params=data)
+
+        # Exit the program if access token is wrong.
+        if address.text == '{"error":"Invalid key"}':
+            print('Please check your access token for LocationIQ API.')
+            sys.exit(1)
+        
+        address = address.json()['display_name']
     # Printing oceanError if locationiq returns unknown address
     except KeyError:
         if oldAddress != oceanError:
